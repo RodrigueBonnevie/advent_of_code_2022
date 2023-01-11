@@ -11,9 +11,12 @@ class CargoShip:
                     self.stacks[stackNumber].insert(0, cargo)
 
     def moveCargo(self, numberOfCargoToMove, sourceStack, destinationStack):
+        tmpStack = []
         for move in range(numberOfCargoToMove):
-            self.stacks[destinationStack].append(
-                self.stacks[sourceStack].pop())
+            tmpStack.insert(0, self.stacks[sourceStack].pop())
+
+        for cargo in tmpStack:
+            self.stacks[destinationStack].append(cargo)
 
     def printTopOfStacks(self):
         stackTops = ""
@@ -23,7 +26,6 @@ class CargoShip:
 
 
 def main():
-
     initialStateList = []
     initialStateRead = False
     with open("input_day5.txt", "r") as inputFile:

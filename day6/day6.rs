@@ -8,12 +8,12 @@ fn are_all_characters_unique(string: &str) -> bool {
     return true;
 }
 
-fn find_start_of_package(string: &str) {
-    let slice = &string[3..string.len()];
+fn find_start_of_marker(string: &str, marker_len: usize) {
+    let slice = &string[marker_len - 1..string.len()];
     for (index, _letter) in slice.chars().enumerate() {
-        let window = &string[index..index + 4];
+        let window = &string[index..index + marker_len];
         if are_all_characters_unique(window) {
-            println!("Unique sequence found at index {}", index + 4);
+            println!("Unique sequence found at index {}", index + marker_len);
             return;
         }
     }
@@ -22,5 +22,8 @@ fn find_start_of_package(string: &str) {
 
 fn main() {
     let file_contents = std::fs::read_to_string("input_day6.txt").expect("File not found");
-    find_start_of_package(&file_contents);
+    println!("Searching for start of package...");
+    find_start_of_marker(&file_contents, 4);
+    println!("Searching for start of message...");
+    find_start_of_marker(&file_contents, 14);
 }
